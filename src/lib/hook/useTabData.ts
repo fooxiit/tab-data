@@ -5,11 +5,14 @@ interface arguments<D> {
     datas: D[];
     isSort?: boolean;
     isFilter?: boolean;
+    maxRow?: number;
 }
 
-function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter }: arguments<D>) {
+function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter, maxRow }: arguments<D>) {
+    if (maxRow && maxRow < 1) throw new Error('maxRow must be greater than 0');
     const [sortBy, setSortBy] = useState<null | keyof D>(null);
     const [filter, setFilter] = useState<Map<keyof D, Set<unknown>>>(new Map());
+    const [page, setPage] = useState(0);
 
     const filtredDatas = useMemo(() => {
         if (filter.size === 0 || !isFilter) return datas;
@@ -46,8 +49,14 @@ function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter 
             return options;
         }, new Map<keyof D, Set<unknown>>());
     }, [datas, isFilter]);
+    const limitedDatas = useMemo(() => {
+        if (!maxRow) return sortDatas;
+        const start = page * maxRow;
+        const end = start + maxRow;
+        return sortDatas.slice(start, end);
+    }, [sortDatas, page, maxRow]);
     return {
-        datas: sortDatas,
+        datas: limitedDatas,
         sortBy: (by: keyof D) => {
             setSortBy(by);
         },
@@ -63,9 +72,22 @@ function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter 
             } else {
                 setFilter(new Map(filter.set(filterKey, new Set([filterValue]))));
             }
+            setPage(0);
         },
         filter,
         filterOptions,
+        pages:
+            maxRow !== undefined
+                ? {
+                      currentPage: page,
+                      maxPage: Math.ceil(sortDatas.length / maxRow),
+                      controle: {
+                          next: () => setPage((prevPage) => (prevPage === Math.ceil(sortDatas.length / maxRow) - 1 ? prevPage : prevPage + 1)),
+                          prev: () => setPage((prevPage) => (prevPage === 0 ? 0 : prevPage - 1)),
+                          set: (page: number) => setPage(page),
+                      },
+                  }
+                : null,
     };
 }
 

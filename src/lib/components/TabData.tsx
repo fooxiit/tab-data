@@ -6,6 +6,7 @@ import FilterSelector from './FilterSelector';
 interface TabDataProps<D extends Record<string, string>[]> extends PropsWithChildren {
     datas: D;
     id: string;
+    maxRow?: number;
     rowModel: {
         columns: { dataKey: keyof ArrayElement<D>; label: string }[];
         idKey: keyof ArrayElement<D>;
@@ -14,8 +15,8 @@ interface TabDataProps<D extends Record<string, string>[]> extends PropsWithChil
     };
 }
 
-export default function TabData<D extends Record<string, string>[]>({ datas, id, rowModel }: TabDataProps<D>) {
-    const { datas: parsedData, sortBy, filterOptions, filterBy, filter } = useTabData({ datas: datas, isSort: rowModel.sort, isFilter: rowModel.filter });
+export default function TabData<D extends Record<string, string>[]>({ datas, id, maxRow, rowModel }: TabDataProps<D>) {
+    const { datas: parsedData, sortBy, filterOptions, filterBy, filter, pages } = useTabData({ datas: datas, isSort: rowModel.sort, isFilter: rowModel.filter, maxRow });
     return (
         <table>
             <thead>
@@ -23,7 +24,7 @@ export default function TabData<D extends Record<string, string>[]>({ datas, id,
                     {rowModel.columns.map((column, index) => (
                         <th key={`${id}-label-${index}`}>
                             <div>
-                                <span>{column.label}</span>
+                                <span>{column.label} </span>
                                 {rowModel.sort && (
                                     <i
                                         onClick={() => {
@@ -53,6 +54,23 @@ export default function TabData<D extends Record<string, string>[]>({ datas, id,
                     </tr>
                 ))}
             </tbody>
+            <tfoot>
+                {pages && (
+                    <tr>
+                        <td colSpan={rowModel.columns.length}>
+                            <button onClick={pages.controle.prev} disabled={pages.currentPage === 0}>
+                                Previous
+                            </button>
+                            <span>
+                                {pages.currentPage + 1} / {pages.maxPage}
+                            </span>
+                            <button onClick={pages.controle.next} disabled={pages.currentPage === pages.maxPage - 1}>
+                                Next
+                            </button>
+                        </td>
+                    </tr>
+                )}
+            </tfoot>
         </table>
     );
 }

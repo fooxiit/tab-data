@@ -1,160 +1,43 @@
 import './App.css';
 import TabData from './lib/components/TabData';
-const MOCKED_DATA = [
-    {
-        id: '1',
-        firstName: 'John ',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
-        satus: 'active',
-        departement: 'Engineering',
-        role: 'Software Engineer',
-        contry: 'USA',
-        zipCode: '12345',
-        state: 'California',
-        street: '123 Main St',
-        city: 'Los Angeles',
-        lastLogin: '2024-06-01T12:00:00Z',
-        createdAt: '2024-01-01T12:00:00Z',
-        updatedAt: '2024-05-01T12:00:00Z',
-    },
-    {
-        id: '2',
-        firstName: 'Jane',
-        lastName: 'Smith',
-        email: 'jane.smith@example.com',
-        satus: 'active',
-        departement: 'Marketing',
-        role: 'Marketing Manager',
-        contry: 'USA',
-        zipCode: '67890',
-        state: 'New York',
-        street: '456 Oak Ave',
-        city: 'New York',
-        lastLogin: '2024-06-01T12:00:00Z',
-        createdAt: '2024-01-01T12:00:00Z',
-        updatedAt: '2024-05-01T12:00:00Z',
-    },
-    {
-        id: '3',
-        firstName: 'Alice',
-        lastName: 'Johnson',
-        email: 'alice.johnson@example.com',
-        satus: 'active',
-        departement: 'Sales',
-        role: 'Sales Associate',
-        contry: 'USA',
-        zipCode: '54321',
-        state: 'Texas',
-        street: '789 Pine Rd',
-        city: 'Houston',
-        lastLogin: '2024-06-01T12:00:00Z',
-        createdAt: '2024-01-01T12:00:00Z',
-        updatedAt: '2024-05-01T12:00:00Z',
-    },
-    {
-        id: '4',
-        firstName: 'Bob',
-        lastName: 'Brown',
-        email: 'bob.brown@example.com',
-        satus: 'active',
-        departement: 'HR',
-        role: 'HR Specialist',
-        contry: 'USA',
-        zipCode: '09876',
-        state: 'Florida',
-        street: '321 Elm St',
-        city: 'Miami',
-        lastLogin: '2024-06-01T12:00:00Z',
-        createdAt: '2024-01-01T12:00:00Z',
-        updatedAt: '2024-05-01T12:00:00Z',
-    },
-    {
-        id: '5',
-        firstName: 'Charlie',
-        lastName: 'Davis',
-        email: 'charlie.davis@example.com',
-        satus: 'active',
-        departement: 'Finance',
-        role: 'Financial Analyst',
-        contry: 'USA',
-        zipCode: '11223',
-        state: 'Illinois',
-        street: '555 Maple Dr',
-        city: 'Chicago',
-        lastLogin: '2024-06-01T12:00:00Z',
-        createdAt: '2024-01-01T12:00:00Z',
-        updatedAt: '2024-05-01T12:00:00Z',
-    },
-    {
-        id: '6',
-        firstName: 'Diana',
-        lastName: 'Wilson',
-        email: 'diana.wilson@example.com',
-        satus: 'active',
-        departement: 'Operations',
-        role: 'Operations Manager',
-        contry: 'USA',
-        zipCode: '33445',
-        state: 'Washington',
-        street: '666 Oak St',
-        city: 'Seattle',
-        lastLogin: '2024-06-01T12:00:00Z',
-        createdAt: '2024-01-01T12:00:00Z',
-        updatedAt: '2024-05-01T12:00:00Z',
-    },
-    {
-        id: '7',
-        firstName: 'Eve',
-        lastName: 'Taylor',
-        email: 'eve.taylor@example.com',
-        satus: 'active',
-        departement: 'IT',
-        role: 'IT Specialist',
-        contry: 'USA',
-        zipCode: '55667',
-        state: 'Colorado',
-        street: '777 Pine St',
-        city: 'Denver',
-        lastLogin: '2024-06-01T12:00:00Z',
-        createdAt: '2024-01-01T12:00:00Z',
-        updatedAt: '2024-05-01T12:00:00Z',
-    },
-    {
-        id: '8',
-        firstName: 'Frank',
-        lastName: 'Moore',
-        email: 'frank.moore@example.com',
-        satus: 'active',
-        departement: 'Legal',
-        role: 'Legal Assistant',
-        contry: 'USA',
-        zipCode: '99887',
-        state: 'California',
-        street: '888 Cedar Ln',
-        city: 'San Francisco',
-        lastLogin: '2024-06-01T12:00:00Z',
-        createdAt: '2024-01-01T12:00:00Z',
-        updatedAt: '2024-05-01T12:00:00Z',
-    },
-    {
-        id: '9',
-        firstName: 'Grace',
-        lastName: 'Lee',
-        email: 'grace.lee@example.com',
-        satus: 'active',
-        departement: 'Marketing',
-        role: 'Marketing Coordinator',
-        contry: 'USA',
-        zipCode: '11223',
-        state: 'New York',
-        street: '999 Oak St',
-        city: 'New York',
-        lastLogin: '2024-06-01T12:00:00Z',
-        createdAt: '2024-01-01T12:00:00Z',
-        updatedAt: '2024-05-01T12:00:00Z',
-    },
-];
+
+function createData(number: number) {
+    const city = ['Los Angeles', 'New York', 'Houston', 'Miami', 'Chicago', 'Seattle', 'Denver', 'San Francisco', 'New York'];
+    const departement = ['Engineering', 'Marketing', 'Sales', 'HR', 'Finance', 'Operations', 'IT', 'Legal', 'Marketing'];
+    const role = ['Software Engineer', 'Marketing Manager', 'Sales Associate', 'HR Specialist', 'Financial Analyst', 'Operations Manager', 'IT Specialist', 'Legal Assistant', 'Marketing Coordinator'];
+    const zipCode = ['12345', '67890', '54321', '09876', '11223', '33445', '55667', '99887', '11223'];
+    const street = ['123 Main St', '456 Oak Ave', '789 Pine Rd', '321 Elm St', '555 Maple Dr', '666 Oak St', '777 Pine St', '888 Cedar Ln', '999 Oak St'];
+    const state = ['California', 'New York', 'Texas', 'Florida', 'Illinois', 'Washington', 'Colorado', 'California', 'New York'];
+    const satus = ['active', 'inactive'];
+    const firstName = ['John ', 'Jane', 'Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank', 'Grace'];
+    const lastName = ['Doe', 'Smith', 'Johnson', 'Brown', 'Davis', 'Wilson', 'Taylor', 'Moore', 'Lee'];
+    const datas = [];
+    for (let i = 0; i < number; i++) {
+        const firstNameRandom = firstName[Math.floor(Math.random() * firstName.length)];
+        const lastNameRandom = lastName[Math.floor(Math.random() * lastName.length)];
+
+        datas.push({
+            id: `${i}`,
+            firstName: firstNameRandom,
+            lastName: lastNameRandom,
+            email: `${firstNameRandom.toLowerCase()}.${lastNameRandom.toLowerCase()}@example.com`,
+            satus: satus[Math.floor(Math.random() * satus.length)],
+            departement: departement[Math.floor(Math.random() * departement.length)],
+            role: role[Math.floor(Math.random() * role.length)],
+            contry: 'USA',
+            zipCode: zipCode[Math.floor(Math.random() * zipCode.length)],
+            state: state[Math.floor(Math.random() * state.length)],
+            street: street[Math.floor(Math.random() * street.length)],
+            city: city[Math.floor(Math.random() * city.length)],
+            lastLogin: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000).toISOString(),
+            createdAt: new Date(Date.now() - Math.floor(Math.random() * 365) * 24 * 60 * 60 * 1000).toISOString(),
+            updatedAt: new Date().toISOString(),
+        });
+    }
+    return datas;
+}
+
+const MOCKED_DATA = createData(1000);
 
 function App() {
     return (
@@ -162,6 +45,7 @@ function App() {
             <TabData
                 datas={MOCKED_DATA}
                 id="rh-data-tab"
+                maxRow={15}
                 rowModel={{
                     columns: [
                         { dataKey: 'firstName', label: 'Firsname' },
