@@ -86,6 +86,74 @@ const MOCKED_DATA = [
         createdAt: '2024-01-01T12:00:00Z',
         updatedAt: '2024-05-01T12:00:00Z',
     },
+    {
+        id: '6',
+        firstName: 'Diana',
+        lastName: 'Wilson',
+        email: 'diana.wilson@example.com',
+        satus: 'active',
+        departement: 'Operations',
+        role: 'Operations Manager',
+        contry: 'USA',
+        zipCode: '33445',
+        state: 'Washington',
+        street: '666 Oak St',
+        city: 'Seattle',
+        lastLogin: '2024-06-01T12:00:00Z',
+        createdAt: '2024-01-01T12:00:00Z',
+        updatedAt: '2024-05-01T12:00:00Z',
+    },
+    {
+        id: '7',
+        firstName: 'Eve',
+        lastName: 'Taylor',
+        email: 'eve.taylor@example.com',
+        satus: 'active',
+        departement: 'IT',
+        role: 'IT Specialist',
+        contry: 'USA',
+        zipCode: '55667',
+        state: 'Colorado',
+        street: '777 Pine St',
+        city: 'Denver',
+        lastLogin: '2024-06-01T12:00:00Z',
+        createdAt: '2024-01-01T12:00:00Z',
+        updatedAt: '2024-05-01T12:00:00Z',
+    },
+    {
+        id: '8',
+        firstName: 'Frank',
+        lastName: 'Moore',
+        email: 'frank.moore@example.com',
+        satus: 'active',
+        departement: 'Legal',
+        role: 'Legal Assistant',
+        contry: 'USA',
+        zipCode: '99887',
+        state: 'California',
+        street: '888 Cedar Ln',
+        city: 'San Francisco',
+        lastLogin: '2024-06-01T12:00:00Z',
+        createdAt: '2024-01-01T12:00:00Z',
+        updatedAt: '2024-05-01T12:00:00Z',
+    },
+    {
+        id: '9',
+        firstName: 'Grace',
+        lastName: 'Lee',
+        email: 'grace.lee@example.com',
+        satus: 'active',
+        departement: 'Marketing',
+        role: 'Marketing Coordinator',
+        contry: 'USA',
+        zipCode: '11223',
+        state: 'New York',
+        street: '999 Oak St',
+        city: 'New York',
+        lastLogin: '2024-06-01T12:00:00Z',
+        createdAt: '2024-01-01T12:00:00Z',
+        updatedAt: '2024-05-01T12:00:00Z',
+    },
 ];
 
 function App() {
@@ -93,6 +161,7 @@ function App() {
         <>
             <TabData
                 datas={MOCKED_DATA}
+                id="rh-data-tab"
                 rowModel={{
                     columns: [
                         { dataKey: 'firstName', label: 'Firsname' },
@@ -105,6 +174,8 @@ function App() {
                         { dataKey: 'satus', label: 'Status' },
                     ],
                     sort: true,
+                    filter: true,
+                    idKey: 'id',
                 }}
             />
         </>
