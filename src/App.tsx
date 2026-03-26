@@ -48,10 +48,11 @@ function App() {
                 maxRow={15}
                 rowModel={{
                     columns: [
-                        { dataKey: 'firstName', label: 'Firsname' },
+                        { dataKey: 'firstName', label: 'FirstName' },
                         { dataKey: 'lastName', label: 'LastName' },
-                        { dataKey: 'departement', label: 'departement' },
-                        { dataKey: 'contry', label: 'Contry' },
+                        { dataKey: 'departement', label: 'Departement' },
+                        { dataKey: 'role', label: 'Role' },
+                        { dataKey: 'contry', label: 'Country' },
                         { dataKey: 'state', label: 'State' },
                         { dataKey: 'city', label: 'City' },
                         { dataKey: 'street', label: 'Street' },

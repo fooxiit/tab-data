@@ -38,17 +38,9 @@ function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter,
     const filterOptions = useMemo(() => {
         console.log('set option');
         if (!isFilter) return null;
-        return datas.reduce((options, data) => {
-            for (const key in data) {
-                if (options.has(key)) {
-                    options.get(key)?.add(data[key]);
-                } else {
-                    options.set(key, new Set([data[key]]));
-                }
-            }
-            return options;
-        }, new Map<keyof D, Set<unknown>>());
-    }, [datas, isFilter]);
+        if (!filtredDatas) return getFilter(datas);
+        return getFilter(filtredDatas);
+    }, [datas, isFilter, filtredDatas]);
     const limitedDatas = useMemo(() => {
         if (!maxRow) return sortDatas;
         const start = page * maxRow;
@@ -92,3 +84,16 @@ function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter,
 }
 
 export default useTabData;
+
+function getFilter<D extends Record<string, string>>(datas: D[]) {
+    return datas.reduce((options, data) => {
+        for (const key in data) {
+            if (options.has(key)) {
+                options.get(key)?.add(data[key]);
+            } else {
+                options.set(key, new Set([data[key]]));
+            }
+        }
+        return options;
+    }, new Map<keyof D, Set<unknown>>());
+}
