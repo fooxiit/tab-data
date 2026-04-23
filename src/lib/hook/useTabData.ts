@@ -1,6 +1,16 @@
 import { useCallback, useMemo, useState } from 'react';
 import compareString from '../function/compareString';
 
+export type PageControle = {
+    currentPage: number;
+    maxPage: number;
+    controle: {
+        next: () => void;
+        prev: () => void;
+        set: (page: number) => void;
+    };
+} | null;
+
 interface arguments<D> {
     datas: D[];
     isSort?: boolean;

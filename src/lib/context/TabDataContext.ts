@@ -1,5 +1,16 @@
 import React from 'react';
+import type { PageControle } from '../hook/useTabData';
 
-const TabDataContext = React.createContext<{ datas: Map<unknown, Record<string, unknown>> } | null>(null);
+interface TabDataContextType {
+    filterBy: (dataKey: string, filterValue: unknown) => void;
+    filterOptions: Map<unknown, Set<unknown>> | null;
+    filter: Map<unknown, Set<unknown>>;
+    sortBy: (dataKey: string) => void;
+    datas: Map<unknown, Record<string, unknown>>;
+    id: string;
+    pages: PageControle;
+}
+
+const TabDataContext = React.createContext<TabDataContextType | null>(null);
 
 export default TabDataContext;
