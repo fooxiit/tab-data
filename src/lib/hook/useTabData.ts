@@ -39,7 +39,6 @@ function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter,
     }, [filtredDatas, sortBy, isSort, dataSet]);
 
     const filterOptions = useMemo(() => {
-        console.log('set option');
         if (!isFilter) return null;
         return getFilter(datas);
     }, [datas, isFilter]);

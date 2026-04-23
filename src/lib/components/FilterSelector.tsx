@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import useExpend from '../hook/useExpend';
 import useSearch from '../hook/useSearch';
 
@@ -7,8 +8,9 @@ interface FilterSelectorProps {
 }
 
 export default function FilterSelector({ option, onFilterSelect }: FilterSelectorProps) {
+    const filterFuction = useCallback((item: [unknown, boolean], searchValue: string) => (item[0] as string).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()), []);
     const [filterIsOpen, controleFilter] = useExpend(false);
-    const { searchResult, searchValue, onSearchChange } = useSearch(option ? option : [], (item, searchValue) => (item[0] as string).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()));
+    const { searchResult, searchValue, onSearchChange } = useSearch(option ? option : [], filterFuction);
     function handleSelect(e: React.MouseEvent<HTMLDivElement>) {
         e.stopPropagation();
         onFilterSelect(e.currentTarget.dataset.value);

@@ -15,7 +15,6 @@ interface TabDataProps<D extends Record<string, string>> extends PropsWithChildr
 
 export default function TabData<D extends Record<string, string>>({ datas, id, maxRow, rowModel }: TabDataProps<D>) {
     const { datas: dataSet, sortBy, filterOptions, filterBy, filter, pages, dataIds } = useTabData({ datas: datas, isSort: rowModel.sort, isFilter: rowModel.filter, maxRow, keyId: rowModel.idKey });
-    console.log('render TabData');
     return (
         <TabDataContext.Provider value={{ pages, datas: dataSet, filterBy, filterOptions, filter, sortBy, id }}>
             <table>

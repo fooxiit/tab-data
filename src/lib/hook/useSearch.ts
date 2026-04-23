@@ -14,7 +14,7 @@ function useSearch<D>(data: D[], filter: (item: D, searchValue: string) => boole
         return () => {
             clearTimeout(debouncedTimer);
         };
-    }, [searchValue, data]);
+    }, [searchValue, data, filter]);
     const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.currentTarget.value);
     };

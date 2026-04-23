@@ -12,7 +12,6 @@ interface DataRowProps<D> {
 
 export default function DataRow<D>({ id, rowModel }: DataRowProps<D>) {
     const data = useGetDataFromId(id);
-
     return (
         <tr>
             {rowModel.columns.map((column, index) => (
