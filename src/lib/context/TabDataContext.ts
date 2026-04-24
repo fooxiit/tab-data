@@ -6,6 +6,7 @@ interface TabDataContextType {
     filterOptions: Map<unknown, Set<unknown>> | null;
     filter: Map<unknown, Set<unknown>>;
     sortBy: (dataKey: string) => void;
+    sortByValue: string | null;
     datas: Map<unknown, Record<string, unknown>>;
     id: string;
     pages: PageControle;

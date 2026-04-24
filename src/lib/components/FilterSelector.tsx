@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 import useExpend from '../hook/useExpend';
 import useSearch from '../hook/useSearch';
+import checkIcon from '../assets/check_small.svg';
+import fillterIcon from '../assets/filter_list.svg';
 
 interface FilterSelectorProps {
     option?: [unknown, boolean][];
@@ -17,18 +19,24 @@ export default function FilterSelector({ option, onFilterSelect }: FilterSelecto
     }
     if (option)
         return (
-            <div onClick={() => controleFilter.toggle()}>
-                <span>FilterSelector</span>
+            <div className="data-table__label__filter" onClick={() => controleFilter.toggle()}>
+                <i className="data-table__label__filter__icon btn">
+                    <img src={fillterIcon} alt="Filter" />
+                </i>
                 {filterIsOpen && (
-                    <div onClick={(e) => e.stopPropagation()}>
-                        <div>
+                    <div className="data-table__label__filter__dropdown" onClick={(e) => e.stopPropagation()}>
+                        <div className="data-table__label__filter__search">
                             <input type="text" placeholder="Search..." value={searchValue} onChange={onSearchChange} />
                         </div>
                         <div>
                             {searchResult.map((option) => (
-                                <div key={`filter-option-${option[0]}`} data-value={option[0]} onClick={handleSelect}>
+                                <div className="data-table__label__filter__option btn" key={`filter-option-${option[0]}`} data-value={option[0]} onClick={handleSelect}>
                                     <span>{option[0] as string} </span>
-                                    <i>{option[1] ? 'select' : 'unSelect'}</i>
+                                    {option[1] && (
+                                        <i>
+                                            <img src={checkIcon} />{' '}
+                                        </i>
+                                    )}
                                 </div>
                             ))}
                         </div>

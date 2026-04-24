@@ -1,0 +1,11 @@
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: start;
+}
+
+.data-table td,
+th {
+    padding: 10px 5px;
+    border: solid #ebebeb 1pt;
+}

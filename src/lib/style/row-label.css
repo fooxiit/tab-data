@@ -1,0 +1,45 @@
+.data-table__thead {
+    background: #3b89ff;
+    color: #fafeff;
+}
+
+.data-table__label__cell {
+    border-color: #a4c1ed;
+}
+
+.data-table__label__sort-icon,
+.data-table__label__filter__icon {
+    width: 1em;
+}
+.data-table__label__cell-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+}
+.data-table__label__cell-icons {
+    display: flex;
+    gap: 5px;
+}
+
+.data-table__label__filter {
+    position: relative;
+}
+
+.data-table__label__filter__dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: absolute;
+    margin: 5px;
+    background: #dfdede;
+    color: black;
+    text-align: left;
+    box-shadow: lightgray 5px 2px 10px;
+}
+
+.data-table__label__filter__option {
+    padding: 0 5px 5px 5px;
+    display: flex;
+    gap: 5px;
+}
