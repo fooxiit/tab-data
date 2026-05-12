@@ -16,32 +16,35 @@ interface arguments<D> {
     isSort?: boolean;
     isFilter?: boolean;
     maxRow?: number;
-    keyId: keyof D;
 }
 
-function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter, maxRow, keyId }: arguments<D>) {
+function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter, maxRow }: arguments<D>) {
     if (maxRow && maxRow < 1) throw new Error('maxRow must be greater than 0');
     const [sortBy, setSortBy] = useState<null | keyof D>(null);
     const [filter, setFilter] = useState<Map<keyof D, Set<unknown>>>(new Map());
     const [page, setPage] = useState(0);
-    const dataSet = useMemo(() => datas.reduce((map, data) => map.set(data[keyId], data), new Map()), [datas, keyId]);
 
     const filtredDatas = useMemo(() => {
-        if (filter.size === 0 || !isFilter) return datas.map((data) => data[keyId]);
-        return filterDatas(datas, filter, keyId);
-    }, [datas, filter, isFilter, keyId]);
+        if (filter.size === 0 || !isFilter) return datas;
+        return datas.filter((data) => {
+            let isValid = true;
+            filter.forEach((filterValue, filterKey) => {
+                if (!filterValue.has(data[filterKey as string])) {
+                    isValid = false;
+                    return;
+                }
+            });
+            return isValid;
+        });
+    }, [datas, filter, isFilter]);
     const sortDatas = useMemo(() => {
-        const sortDataBy = (by: keyof D, datas: unknown[]) => {
-            return [...datas].sort((a, b) => compareString('US', dataSet.get(a)[by], dataSet.get(b)[by]));
+        const sortDataBy = (by: keyof D, datas: D[]) => {
+            return [...datas].sort((a, b) => compareString('US', a[by as string], b[by as string]));
         };
         if (!sortBy || !isSort) return filtredDatas;
         return sortDataBy(sortBy, filtredDatas);
-    }, [filtredDatas, sortBy, isSort, dataSet]);
+    }, [filtredDatas, sortBy, isSort]);
 
-    const filterOptions = useMemo(() => {
-        if (!isFilter) return null;
-        return getFilter(datas);
-    }, [datas, isFilter]);
     const limitedDatas = useMemo(() => {
         if (!maxRow) return sortDatas;
         const start = page * maxRow;
@@ -83,43 +86,13 @@ function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter,
         };
     }, [sortDatas, maxRow, page]);
     return {
-        datas: dataSet,
-        dataIds: limitedDatas,
+        filtedDatas: limitedDatas,
         sortBy: handelSort,
         sortByValue: sortBy,
         filterBy,
         filter,
-        filterOptions,
         pages: pages,
     };
 }
 
 export default useTabData;
-
-function getFilter<D extends Record<string, string>>(datas: D[]) {
-    return datas.reduce((options, data) => {
-        for (const key in data) {
-            if (options.has(key)) {
-                options.get(key)?.add(data[key]);
-            } else {
-                options.set(key, new Set([data[key]]));
-            }
-        }
-        return options;
-    }, new Map<keyof D, Set<unknown>>());
-}
-
-function filterDatas<D extends Record<string, unknown>>(datas: D[], filter: Map<keyof D, Set<unknown>>, keyId: keyof D) {
-    return datas.reduce<unknown[]>((dataIds, data) => {
-        let isValid = true;
-        filter.forEach((filterValue, filterKey) => {
-            if (!filterValue.has(data[filterKey as string])) {
-                isValid = false;
-                return;
-            }
-        });
-        if (isValid) dataIds.push(data[keyId]);
-
-        return dataIds;
-    }, []);
-}

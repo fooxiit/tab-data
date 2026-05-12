@@ -7,6 +7,7 @@ import RowLabel from './RowLabel';
 import PageControle from './PageControle';
 import '../style/data-table.css';
 import '../style/index.css';
+import useExtractFilterOption from '../hook/useExtractFilterOption';
 
 interface TabDataProps<D extends Record<string, string>> extends PropsWithChildren {
     datas: D[];
@@ -17,25 +18,17 @@ interface TabDataProps<D extends Record<string, string>> extends PropsWithChildr
 }
 
 export default function TabData<D extends Record<string, string>>({ datas, id, maxRow, rowModel, className }: TabDataProps<D>) {
-    const {
-        datas: dataSet,
-        sortBy,
-        sortByValue,
-        filterOptions,
-        filterBy,
-        filter,
-        pages,
-        dataIds,
-    } = useTabData({ datas: datas, isSort: rowModel.sort, isFilter: rowModel.filter, maxRow, keyId: rowModel.idKey });
+    const { sortBy, sortByValue, filterBy, filter, pages, filtedDatas } = useTabData({ datas: datas, isSort: rowModel.sort, isFilter: rowModel.filter, maxRow });
+    const filterOptions = useExtractFilterOption(datas, rowModel.filter);
     return (
-        <TabDataContext.Provider value={{ pages, datas: dataSet, filterBy, filterOptions, filter, sortBy, sortByValue: sortByValue as string | null, id }}>
+        <TabDataContext.Provider value={{ pages, filterBy, filterOptions, filter, sortBy, sortByValue: sortByValue as string | null, id }}>
             <table className={className ? className : 'data-table'}>
                 <thead className={className ? `${className}__thead` : 'data-table__thead'}>
                     <RowLabel rowModel={rowModel} className={className} />
                 </thead>
                 <tbody className={className ? `${className}__tbody` : 'data-table__tbody'}>
-                    {dataIds.map((dataId) => (
-                        <DataRow key={`${id}-row-${dataId}`} id={dataId} rowModel={{ ...rowModel, tabId: id }} className={className} />
+                    {filtedDatas.map((data) => (
+                        <DataRow key={`${id}-row-${data[rowModel.idKey]}`} id={data[rowModel.idKey]} rowModel={{ ...rowModel, tabId: id }} className={className} data={data} />
                     ))}
                 </tbody>
                 <tfoot className={className ? `${className}__tfoot` : 'data-table__tfoot'}>

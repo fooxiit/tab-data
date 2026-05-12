@@ -1,4 +1,3 @@
-import useGetDataFromId from '../hook/useGetDataFromId';
 import type { RowModelType } from '../type/type';
 import '../style/data-row.css';
 
@@ -10,10 +9,10 @@ interface DataRowProps<D> {
     id: unknown;
     rowModel: RowModelTypeExtend<D>;
     className?: string;
+    data: Record<string, unknown>;
 }
 
-export default function DataRow<D>({ id, rowModel, className }: DataRowProps<D>) {
-    const data = useGetDataFromId(id);
+export default function DataRow<D>({ id, rowModel, className, data }: DataRowProps<D>) {
     return (
         <tr className={className ? `${className}__row` : 'data-table__row'}>
             {rowModel.columns.map((column, index) => (
