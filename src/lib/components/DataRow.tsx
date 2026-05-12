@@ -9,14 +9,15 @@ interface RowModelTypeExtend<D> extends RowModelType<D> {
 interface DataRowProps<D> {
     id: unknown;
     rowModel: RowModelTypeExtend<D>;
+    className?: string;
 }
 
-export default function DataRow<D>({ id, rowModel }: DataRowProps<D>) {
+export default function DataRow<D>({ id, rowModel, className }: DataRowProps<D>) {
     const data = useGetDataFromId(id);
     return (
-        <tr className="data-table__row">
+        <tr className={className ? `${className}__row` : 'data-table__row'}>
             {rowModel.columns.map((column, index) => (
-                <td className="data-table__row__cell" key={`${rowModel.tabId}-row-${id}-${index}`}>
+                <td className={className ? `${className}__row__cell` : 'data-table__row__cell'} key={`${rowModel.tabId}-row-${id}-${index}`}>
                     {data[column.dataKey as string] as string}
                 </td>
             ))}

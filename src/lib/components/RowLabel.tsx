@@ -7,23 +7,24 @@ import sortIconUnactive from '../assets/sort_unactive.svg';
 
 interface RowLabelProps<D> {
     rowModel: RowModelType<D>;
+    className?: string;
 }
 
-export default function RowLabel<D>({ rowModel }: RowLabelProps<D>) {
+export default function RowLabel<D>({ rowModel, className }: RowLabelProps<D>) {
     const { filterBy, sortBy, filterOptions, id, filter, sortByValue } = useTabDataContext();
     return (
-        <tr className="data-table__label">
+        <tr className={className ? `${className}__label` : 'data-table__label'}>
             {rowModel.columns.map((column, index) => (
-                <th key={`${id}-label-${index}`} className="data-table__label__cell">
-                    <div className="data-table__label__cell-content">
+                <th key={`${id}-label-${index}`} className={className ? `${className}__label__cell` : 'data-table__label__cell'}>
+                    <div className={className ? `${className}__label__cell-content` : 'data-table__label__cell-content'}>
                         <span>{column.label} </span>
-                        <div className="data-table__label__cell-icons">
+                        <div className={className ? `${className}__label__cell-icons` : 'data-table__label__cell-icons'}>
                             {rowModel.sort && (
                                 <i
                                     onClick={() => {
                                         sortBy(column.dataKey as string);
                                     }}
-                                    className="btn data-table__label__sort-icon"
+                                    className={className ? `${className}__label__sort-icon` : 'btn data-table__label__sort-icon'}
                                 >
                                     {sortByValue === column.dataKey ? <img src={sortIconActive} alt="Sorted" /> : <img src={sortIconUnactive} alt="Sort" />}
                                 </i>

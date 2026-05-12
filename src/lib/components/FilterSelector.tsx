@@ -7,9 +7,10 @@ import fillterIcon from '../assets/filter_list.svg';
 interface FilterSelectorProps {
     option?: [unknown, boolean][];
     onFilterSelect: (filterValue: unknown) => void;
+    className?: string;
 }
 
-export default function FilterSelector({ option, onFilterSelect }: FilterSelectorProps) {
+export default function FilterSelector({ option, onFilterSelect, className }: FilterSelectorProps) {
     const filterFuction = useCallback((item: [unknown, boolean], searchValue: string) => (item[0] as string).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()), []);
     const [filterIsOpen, controleFilter] = useExpend(false);
     const { searchResult, searchValue, onSearchChange } = useSearch(option ? option : [], filterFuction);
@@ -19,18 +20,23 @@ export default function FilterSelector({ option, onFilterSelect }: FilterSelecto
     }
     if (option)
         return (
-            <div className="data-table__label__filter" onClick={() => controleFilter.toggle()}>
-                <i className="data-table__label__filter__icon btn">
+            <div className={className ? `${className}__label__filter` : 'data-table__label__filter'} onClick={() => controleFilter.toggle()}>
+                <i className={className ? `${className}__label__filter__icon` : 'data-table__label__filter__icon btn'}>
                     <img src={fillterIcon} alt="Filter" />
                 </i>
                 {filterIsOpen && (
-                    <div className="data-table__label__filter__dropdown" onClick={(e) => e.stopPropagation()}>
-                        <div className="data-table__label__filter__search">
+                    <div className={className ? `${className}__label__filter__dropdown` : 'data-table__label__filter__dropdown'} onClick={(e) => e.stopPropagation()}>
+                        <div className={className ? `${className}__label__filter__search` : 'data-table__label__filter__search'}>
                             <input type="text" placeholder="Search..." value={searchValue} onChange={onSearchChange} />
                         </div>
                         <div>
                             {searchResult.map((option) => (
-                                <div className="data-table__label__filter__option btn" key={`filter-option-${option[0]}`} data-value={option[0]} onClick={handleSelect}>
+                                <div
+                                    className={className ? `${className}__label__filter__option` : 'data-table__label__filter__option btn'}
+                                    key={`filter-option-${option[0]}`}
+                                    data-value={option[0]}
+                                    onClick={handleSelect}
+                                >
                                     <span>{option[0] as string} </span>
                                     {option[1] && (
                                         <i>
