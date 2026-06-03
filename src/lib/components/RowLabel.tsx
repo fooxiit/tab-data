@@ -26,7 +26,7 @@ export default function RowLabel<D>({ rowModel, className }: RowLabelProps<D>) {
                                     }}
                                     className={className ? `${className}__label__sort-icon` : 'btn data-table__label__sort-icon'}
                                 >
-                                    {sortByValue === column.dataKey ? <img src={sortIconActive} alt="Sorted" /> : <img src={sortIconUnactive} alt="Sort" />}
+                                    {sortByValue?.key === column.dataKey ? <img src={sortIconActive} alt="Sorted" /> : <img src={sortIconUnactive} alt="Sort" />}
                                 </i>
                             )}
                             {filterOptions && (

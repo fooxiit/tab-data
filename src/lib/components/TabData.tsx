@@ -8,6 +8,9 @@ import PageControle from './PageControle';
 import '../style/data-table.css';
 import '../style/index.css';
 import useExtractFilterOption from '../hook/useExtractFilterOption';
+import useFilter from '../hook/useFilter';
+import useSelectSort, { type SortBy } from '../hook/useSelectSort';
+import usePageSelector from '../hook/usePageSelector';
 
 interface TabDataProps<D extends Record<string, string>> extends PropsWithChildren {
     datas: D[];
@@ -18,10 +21,29 @@ interface TabDataProps<D extends Record<string, string>> extends PropsWithChildr
 }
 
 export default function TabData<D extends Record<string, string>>({ datas, id, maxRow, rowModel, className }: TabDataProps<D>) {
-    const { sortBy, sortByValue, filterBy, filter, pages, filtedDatas } = useTabData({ datas: datas, isSort: rowModel.sort, isFilter: rowModel.filter, maxRow });
+    const { filter, filterBy } = useFilter<D>();
+    const { sortBy, sortByValue } = useSelectSort<D>();
+    const { currentPage, maxPage, controle } = usePageSelector(datas.length, maxRow);
+    const { filtedDatas } = useTabData({ filter, datas: datas, isSort: rowModel.sort, isFilter: rowModel.filter, maxRow, sortByValue, page: currentPage });
     const filterOptions = useExtractFilterOption(datas, rowModel.filter);
     return (
-        <TabDataContext.Provider value={{ pages, filterBy, filterOptions, filter, sortBy, sortByValue: sortByValue as string | null, id }}>
+        <TabDataContext.Provider
+            value={{
+                pages: { currentPage, maxPage, controle },
+                filterBy: (filterKey, filterValue) => {
+                    controle.set(0);
+                    filterBy(filterKey, filterValue);
+                },
+                filterOptions,
+                filter,
+                sortBy: (dataKey) => {
+                    controle.set(0);
+                    sortBy(dataKey);
+                },
+                sortByValue: sortByValue as SortBy<Record<string, string>> | null,
+                id,
+            }}
+        >
             <table className={className ? className : 'data-table'}>
                 <thead className={className ? `${className}__thead` : 'data-table__thead'}>
                     <RowLabel rowModel={rowModel} className={className} />

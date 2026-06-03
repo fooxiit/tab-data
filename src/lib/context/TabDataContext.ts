@@ -1,12 +1,13 @@
 import React from 'react';
 import type { PageControle } from '../hook/useTabData';
+import type { SortBy } from '../hook/useSelectSort';
 
 interface TabDataContextType {
     filterBy: (dataKey: string, filterValue: unknown) => void;
     filterOptions: Map<unknown, Set<unknown>> | null;
     filter: Map<unknown, Set<unknown>>;
     sortBy: (dataKey: string) => void;
-    sortByValue: string | null;
+    sortByValue: SortBy<Record<string, string>> | null;
     id: string;
     pages: PageControle;
 }
