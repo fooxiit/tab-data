@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
-function useFilter<D extends Record<string, string>>() {
-    const [filter, setFilter] = useState<Map<keyof D, Set<unknown>>>(new Map());
+function useFilter<D extends Record<string, string>>(initialFilter?: Map<keyof D, Set<unknown>>) {
+    const [filter, setFilter] = useState<Map<keyof D, Set<unknown>>>(initialFilter || new Map());
     const filterBy = useCallback(
         (filterKey: keyof D, filterValue: unknown) => {
             console.log('filter by', filterKey, filterValue);
