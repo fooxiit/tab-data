@@ -2,8 +2,8 @@ import { useCallback, useState } from 'react';
 
 export type SortBy<D extends Record<string, string>> = { key: keyof D; direction: 'asc' | 'desc' };
 
-function useSelectSort<D extends Record<string, string>>() {
-    const [sortByValue, setSortBy] = useState<SortBy<D> | null>(null);
+function useSelectSort<D extends Record<string, string>>(initialSortByValue?: SortBy<D> | null) {
+    const [sortByValue, setSortBy] = useState<SortBy<D> | null>(initialSortByValue || null);
 
     const sortBy = useCallback(
         (by: keyof D) => {
