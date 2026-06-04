@@ -4,7 +4,6 @@ function useFilter<D extends Record<string, string>>(initialFilter?: Map<keyof D
     const [filter, setFilter] = useState<Map<keyof D, Set<unknown>>>(initialFilter || new Map());
     const filterBy = useCallback(
         (filterKey: keyof D, filterValue: unknown) => {
-            console.log('filter by', filterKey, filterValue);
             const filterOption = filter.get(filterKey);
             if (filterOption) {
                 if (!filterOption.delete(filterValue)) {
