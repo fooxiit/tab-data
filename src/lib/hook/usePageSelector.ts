@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 
-function usePageSelector(dataLength: number, maxRow?: number) {
-    const [page, setPage] = useState(0);
+function usePageSelector(dataLength: number, maxRow?: number, InitialPage?: number) {
+    const [page, setPage] = useState(InitialPage || 0);
     const maxPage = useMemo(() => Math.ceil(dataLength / (maxRow || dataLength)), [dataLength, maxRow]);
     function next() {
         setPage((prevPage) => (prevPage === maxPage - 1 ? prevPage : prevPage + 1));
