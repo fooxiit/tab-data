@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
-import usePageSelector from '../hook/usePageSelector';
+import usePageSelector from '../../hook/usePageSelector';
 import { act } from 'react';
 
 describe('test usePageSelector hook', () => {
