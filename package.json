@@ -1,38 +1,40 @@
 {
-    "name": "tab-data",
-    "private": true,
-    "version": "0.0.0",
-    "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "tsc -b && vite build",
-        "lint": "eslint .",
-        "preview": "vite preview",
-        "test:unit": "vitest --root src",
-        "test:coverage": "vitest --coverage --root src"
-    },
-    "dependencies": {
-        "@testing-library/react": "^16.3.2",
-        "react": "^19.2.4",
-        "react-dom": "^19.2.4",
-        "vitest-browser-react": "^2.2.0"
-    },
-    "devDependencies": {
-        "@eslint/js": "^9.39.4",
-        "@types/node": "^24.12.0",
-        "@types/react": "^19.2.14",
-        "@types/react-dom": "^19.2.3",
-        "@vitejs/plugin-react": "^6.0.0",
-        "@vitest/coverage-v8": "^4.1.8",
-        "eslint": "^9.39.4",
-        "eslint-plugin-react-hooks": "^7.0.1",
-        "eslint-plugin-react-refresh": "^0.5.2",
-        "globals": "^17.4.0",
-        "jest": "^30.4.2",
-        "jsdom": "^29.1.1",
-        "typescript": "~5.9.3",
-        "typescript-eslint": "^8.56.1",
-        "vite": "^8.0.0",
-        "vitest": "^4.1.8"
-    }
+  "name": "tab-data",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test:unit": "vitest --root src",
+    "test:coverage": "vitest --coverage --root src",
+    "test:browser": "vitest --config=vitest.browser.config.ts"
+  },
+  "dependencies": {
+    "@testing-library/react": "^16.3.2",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "vitest-browser-react": "^2.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^24.12.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.0",
+    "@vitest/browser-playwright": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.8",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
+    "jest": "^30.4.2",
+    "jsdom": "^29.1.1",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.56.1",
+    "vite": "^8.0.0",
+    "vitest": "^4.1.8"
+  }
 }

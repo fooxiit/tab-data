@@ -1,7 +1,7 @@
 import type { RowModelType } from '../type/type';
 import '../style/data-row.css';
 
-interface RowModelTypeExtend<D> extends RowModelType<D> {
+export interface RowModelTypeExtend<D> extends RowModelType<D> {
     tabId: string;
 }
 
