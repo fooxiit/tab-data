@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import TabDataContext from '../context/TabDataContext';
-
+//Gère l'utilistaion du context en s'asurant qu'il soit appelé avec le bon provider
 const useTabDataContext = () => {
     const context = useContext(TabDataContext);
     if (!context) throw new Error('useTabDataContext must be used within a TabDataProvider');

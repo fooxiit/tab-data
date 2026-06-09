@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-
+//Gère un état d'expansion / réduction
 function useExpend(initial: boolean) {
     const [isExpend, setIsExpend] = useState(initial);
 

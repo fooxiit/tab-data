@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-
+//Gère l'état des filtres. Chaque appel à `filterBy` active ou désactive un filtre.
 function useFilter<D extends Record<string, string>>(initialFilter?: Map<keyof D, Set<unknown>>) {
     const [filter, setFilter] = useState<Map<keyof D, Set<unknown>>>(initialFilter || new Map());
     const filterBy = useCallback(

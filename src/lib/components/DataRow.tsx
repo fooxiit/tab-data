@@ -11,7 +11,7 @@ interface DataRowProps<D> {
     className?: string;
     data: Record<string, unknown>;
 }
-
+//Rend une ligne `<tr>` à partir d'un objet de données et d'un modèle de colonnes.
 export default function DataRow<D>({ id, rowModel, className, data }: DataRowProps<D>) {
     return (
         <tr className={className ? `${className}__row` : 'data-table__row'}>

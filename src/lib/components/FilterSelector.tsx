@@ -9,7 +9,7 @@ interface FilterSelectorProps {
     onFilterSelect: (filterValue: unknown) => void;
     className?: string;
 }
-
+//Menu déroulant de filtrage avec barre de recherche interne.
 export default function FilterSelector({ option, onFilterSelect, className }: FilterSelectorProps) {
     const filterFuction = useCallback((item: [unknown, boolean], searchValue: string) => (item[0] as string).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()), []);
     const [filterIsOpen, controleFilter] = useExpend(false);

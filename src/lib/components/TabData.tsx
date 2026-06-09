@@ -20,6 +20,8 @@ interface TabDataProps<D extends Record<string, string>> extends PropsWithChildr
     className?: string;
 }
 
+//Composant principal qui orchestre le tableau complet
+
 export default function TabData<D extends Record<string, string>>({ datas, id, maxRow, rowModel, className }: TabDataProps<D>) {
     const { filter, filterBy } = useFilter<D>();
     const { sortBy, sortByValue } = useSelectSort<D>();

@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-
+//Gère la pagination
 function usePageSelector(dataLength: number, maxRow?: number, InitialPage?: number) {
     const [page, setPage] = useState(InitialPage || 0);
     const maxPage = useMemo(() => Math.ceil(dataLength / (maxRow || dataLength)), [dataLength, maxRow]);

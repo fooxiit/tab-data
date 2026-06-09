@@ -21,7 +21,7 @@ interface arguments<D extends Record<string, string>> {
     sortByValue?: SortBy<D> | null;
     page?: number;
 }
-
+//Hook principal qui applique le filtrage, le tri et la pagination sur un tableau de données.
 function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter, maxRow, filter = new Map(), sortByValue, page }: arguments<D>) {
     if (maxRow && maxRow < 1) throw new Error('maxRow must be greater than 0');
 

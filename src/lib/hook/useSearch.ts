@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+//Filtre une liste de données selon une valeur de recherche saisie, avec un debounce de 250 ms.
 function useSearch<D>(data: D[], filter: (item: D, searchValue: string) => boolean) {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState<D[]>(data);

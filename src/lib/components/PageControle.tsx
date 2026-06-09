@@ -1,6 +1,6 @@
 import useTabDataContext from '../hook/useTabDataContext';
 import '../style/page-controleur.css';
-
+//Contrôles de pagination (boutons Précédent / Suivant, numéro de page).
 export default function PageControle({ colSpan, className }: { colSpan: number; className?: string }) {
     const { pages } = useTabDataContext();
     if (!pages) return null;

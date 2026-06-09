@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 export type SortBy<D extends Record<string, string>> = { key: keyof D; direction: 'asc' | 'desc' };
-
+//Gère l'état du tri en faisant cycler les directions
 function useSelectSort<D extends Record<string, string>>(initialSortByValue?: SortBy<D> | null) {
     const [sortByValue, setSortBy] = useState<SortBy<D> | null>(initialSortByValue || null);
 

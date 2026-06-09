@@ -9,7 +9,7 @@ interface RowLabelProps<D> {
     rowModel: RowModelType<D>;
     className?: string;
 }
-
+//Rend la ligne d'en-têtes `<thead>` avec les libellés
 export default function RowLabel<D>({ rowModel, className }: RowLabelProps<D>) {
     const { filterBy, sortBy, filterOptions, id, filter, sortByValue } = useTabDataContext();
     return (
