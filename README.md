@@ -41,7 +41,7 @@ npm install tab-data
 ## Utilisation rapide
 
 ```tsx
-import TabData from 'tab-data';
+import TabData from '@fooxit/tab-data';
 
 type Employee = {
     id: string;

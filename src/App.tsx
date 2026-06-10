@@ -1,5 +1,5 @@
 import './App.css';
-import TabData from './lib/components/TabData';
+import TabData from '../lib/components/TabData';
 
 function createData(number: number) {
     const city = ['Los Angeles', 'New York', 'Houston', 'Miami', 'Chicago', 'Seattle', 'Denver', 'San Francisco', 'New York'];

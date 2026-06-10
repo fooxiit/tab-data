@@ -7,6 +7,7 @@
     ],
     "main": "./dist/tab-data.umd.cjs",
     "module": "./dist/tab-data.js",
+    "types": "./dist/main.d.ts",
     "exports": {
         ".": {
             "import": "./dist/tab-data.js",
@@ -15,19 +16,20 @@
     },
     "scripts": {
         "dev": "vite",
-        "build": "tsc -b && vite build",
+        "build": "tsc -b ./tsconfig.lib.json && vite build",
         "lint": "eslint .",
         "preview": "vite preview",
         "test:unit": "vitest --root src",
         "test:coverage": "vitest --coverage --root src",
         "test:browser": "vitest --config=vitest.browser.config.ts"
     },
-    "dependencies": {
+    "peerDependencies": {
         "react": "^19.2.4",
         "react-dom": "^19.2.4"
     },
     "devDependencies": {
         "@eslint/js": "^9.39.4",
+        "@testing-library/react": "^16.3.2",
         "@types/node": "^24.12.0",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
@@ -40,11 +42,13 @@
         "globals": "^17.4.0",
         "jest": "^30.4.2",
         "jsdom": "^29.1.1",
+        "react": "^19.2.4",
+        "react-dom": "^19.2.4",
         "typescript": "~5.9.3",
         "typescript-eslint": "^8.56.1",
+        "unplugin-dts": "^1.0.2",
         "vite": "^8.0.0",
         "vitest": "^4.1.8",
-        "vitest-browser-react": "^2.2.0",
-        "@testing-library/react": "^16.3.2"
+        "vitest-browser-react": "^2.2.0"
     }
 }
