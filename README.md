@@ -42,6 +42,8 @@ npm install tab-data
 
 ```tsx
 import TabData from '@fooxit/tab-data';
+import '../node_modules/@fooxit/tab-data/dist/main.css';
+import type { RowModelType } from '../../../tab-data/dist/type/type';
 
 type Employee = {
     id: string;
@@ -55,7 +57,7 @@ const employees: Employee[] = [
     { id: '2', firstName: 'Bob', lastName: 'Dupont', department: 'IT' },
 ];
 
-const rowModel = {
+const rowModel: RowModelType<Employee> = {
     columns: [
         { dataKey: 'firstName', label: 'Prénom' },
         { dataKey: 'lastName', label: 'Nom' },

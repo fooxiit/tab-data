@@ -5,13 +5,10 @@
     "files": [
         "dist"
     ],
-    "main": "./dist/tab-data.umd.cjs",
-    "module": "./dist/tab-data.js",
-    "types": "./dist/main.d.ts",
+    "main": "./dist/tab-data.js",
     "exports": {
         ".": {
-            "import": "./dist/tab-data.js",
-            "require": "./dist/my-lib.umd.cjs"
+            "import": "./dist/tab-data.js"
         }
     },
     "scripts": {
@@ -39,6 +36,7 @@
         "eslint": "^9.39.4",
         "eslint-plugin-react-hooks": "^7.0.1",
         "eslint-plugin-react-refresh": "^0.5.2",
+        "glob": "^13.0.6",
         "globals": "^17.4.0",
         "jest": "^30.4.2",
         "jsdom": "^29.1.1",
@@ -48,6 +46,8 @@
         "typescript-eslint": "^8.56.1",
         "unplugin-dts": "^1.0.2",
         "vite": "^8.0.0",
+        "vite-plugin-lib-inject-css": "^2.2.2",
+        "vite-plugin-libcss": "^1.1.2",
         "vitest": "^4.1.8",
         "vitest-browser-react": "^2.2.0"
     }
