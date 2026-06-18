@@ -1,7 +1,15 @@
+.data-table__warper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px;
+}
+
 .data-table {
     width: 100%;
     border-collapse: collapse;
     text-align: start;
+    padding: 5px 0;
 }
 
 .data-table td,

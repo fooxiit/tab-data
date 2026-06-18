@@ -12,7 +12,7 @@ Librairie React générique pour afficher et gérer des tableaux de données ave
     - [TabData](#tabdata)
     - [DataRow](#datarow)
     - [FilterSelector](#filterselector)
-    - [PageControle](#pagecontrole)
+    - [PageControl](#pageControl)
     - [RowLabel](#rowlabel)
 - [Hooks](#hooks)
     - [useTabData](#usetabdata)
@@ -135,12 +135,12 @@ Retourne `undefined` si aucune option n'est fournie.
 
 ---
 
-### `PageControle`
+### `PageControl`
 
 Contrôles de pagination (boutons Précédent / Suivant, numéro de page). Utilise le contexte `TabDataContext` — doit être placé à l'intérieur d'un `TabData`.
 
 ```tsx
-<PageControle colSpan={4} className="my-table" />
+<PageControl colSpan={4} className="my-table" />
 ```
 
 | Prop        | Type     | Description                                               |
@@ -245,26 +245,26 @@ sortBy('lastName'); // Troisième appel : pas de tri
 Gère la pagination : page courante, page maximale et contrôles de navigation.
 
 ```tsx
-const { currentPage, maxPage, controle } = usePageSelector(
+const { currentPage, maxPage, Control } = usePageSelector(
     employees.length, // longueur totale
     10, // lignes par page
     1, // page initiale
 );
 
-controle.next(); // page suivante
-controle.prev(); // page précédente
-controle.set(3); // aller à la page 3
+Control.next(); // page suivante
+Control.prev(); // page précédente
+Control.set(3); // aller à la page 3
 ```
 
 **Retourne :**
 
-| Propriété       | Type                     | Description                |
-| --------------- | ------------------------ | -------------------------- |
-| `currentPage`   | `number`                 | Page actuelle              |
-| `maxPage`       | `number`                 | Nombre total de pages      |
-| `controle.next` | `() => void`             | Aller à la page suivante   |
-| `controle.prev` | `() => void`             | Aller à la page précédente |
-| `controle.set`  | `(page: number) => void` | Aller à une page précise   |
+| Propriété      | Type                     | Description                |
+| -------------- | ------------------------ | -------------------------- |
+| `currentPage`  | `number`                 | Page actuelle              |
+| `maxPage`      | `number`                 | Nombre total de pages      |
+| `Control.next` | `() => void`             | Aller à la page suivante   |
+| `Control.prev` | `() => void`             | Aller à la page précédente |
+| `Control.set`  | `(page: number) => void` | Aller à une page précise   |
 
 ---
 
@@ -378,4 +378,4 @@ Chaque composant accepte une prop `className` qui est utilisée comme **préfixe
 </table>
 ```
 
-Les styles par défaut sont importés automatiquement via les fichiers CSS internes (`data-table.css`, `data-row.css`, `row-label.css`, `page-controleur.css`). Vous pouvez les surcharger avec vos propres règles CSS.
+Les styles par défaut sont importés automatiquement via les fichiers CSS internes (`data-table.css`, `data-row.css`, `row-label.css`, `page-Controlur.css`). Vous pouvez les surcharger avec vos propres règles CSS.

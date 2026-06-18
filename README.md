@@ -12,8 +12,9 @@ Librairie React générique pour afficher et gérer des tableaux de données ave
     - [TabData](#tabdata)
     - [DataRow](#datarow)
     - [FilterSelector](#filterselector)
-    - [PageControle](#pagecontrole)
+    - [PageControl](#pageControl)
     - [RowLabel](#rowlabel)
+    - [SearchBar](#searchbar)
 - [Hooks](#hooks)
     - [useTabData](#usetabdata)
     - [useFilter](#usefilter)
@@ -79,19 +80,20 @@ export default function App() {
 
 ### `TabData`
 
-Composant principal qui orchestre le tableau complet (en-têtes, lignes, pagination, filtres, tri).
+Composant principal qui orchestre le tableau complet (en-têtes, lignes, pagination, filtres, tri,recherche).
 
 ```tsx
 <TabData id="my-table" datas={data} rowModel={rowModel} maxRow={10} className="my-table" />
 ```
 
-| Prop        | Type              | Obligatoire | Description                                             |
-| ----------- | ----------------- | ----------- | ------------------------------------------------------- |
-| `id`        | `string`          | Oui         | Identifiant unique du tableau                           |
-| `datas`     | `D[]`             | Oui         | Tableau de données génériques                           |
-| `rowModel`  | `RowModelType<D>` | Oui         | Modèle de colonnes (voir [Types](#types))               |
-| `maxRow`    | `number`          | Non         | Nombre maximum de lignes par page (par défaut : toutes) |
-| `className` | `string`          | Non         | Préfixe de classe CSS appliqué aux éléments             |
+| Prop        | Type                | Obligatoire | Description                                             |
+| ----------- | ------------------- | ----------- | ------------------------------------------------------- |
+| `id`        | `string`            | Oui         | Identifiant unique du tableau                           |
+| `datas`     | `D[]`               | Oui         | Tableau de données génériques                           |
+| `rowModel`  | `RowModelType<D>`   | Oui         | Modèle de colonnes (voir [Types](#types))               |
+| `maxRow`    | `number`            | Non         | Nombre maximum de lignes par page (par défaut : toutes) |
+| `search`    | `{ label: string }` | Non         | Objet de recherche contenant le libellé du champ        |
+| `className` | `string`            | Non         | Préfixe de classe CSS appliqué aux éléments             |
 
 ---
 
@@ -137,12 +139,12 @@ Retourne `undefined` si aucune option n'est fournie.
 
 ---
 
-### `PageControle`
+### `PageControl`
 
 Contrôles de pagination (boutons Précédent / Suivant, numéro de page). Utilise le contexte `TabDataContext` — doit être placé à l'intérieur d'un `TabData`.
 
 ```tsx
-<PageControle colSpan={4} className="my-table" />
+<PageControl colSpan={4} className="my-table" />
 ```
 
 | Prop        | Type     | Description                                               |
@@ -166,6 +168,24 @@ Rend la ligne d'en-têtes `<thead>` avec les libellés, indicateurs de tri et fi
 | ----------- | ----------------- | --------------------- |
 | `rowModel`  | `RowModelType<D>` | Modèle de colonnes    |
 | `className` | `string`          | Préfixe de classe CSS |
+
+---
+
+### `SearchBar`
+
+Barre de recherche globale qui permet de filtrer les lignes du tableau en fonction du texte saisi.
+Pour l'activer dans le composant TabData passer la props "search"
+
+```tsx
+<SearchBar value={searchValue} onChange={(value) => setSearchValue(value)} placeholder="Rechercher dans le tableau..." className="my-table" />
+```
+
+| Prop          | Type                                               | Description                           |
+| ------------- | -------------------------------------------------- | ------------------------------------- |
+| `value`       | `string`                                           | Texte de recherche actuel             |
+| `onChange`    | `(e: React.ChangeEvent<HTMLInputElement>) => void` | Callback appelé à chaque modification |
+| `placeholder` | `string`                                           | Texte d'aide affiché dans l'input     |
+| `className`   | `string`                                           | Préfixe de classe CSS                 |
 
 ---
 
@@ -247,26 +267,26 @@ sortBy('lastName'); // Troisième appel : pas de tri
 Gère la pagination : page courante, page maximale et contrôles de navigation.
 
 ```tsx
-const { currentPage, maxPage, controle } = usePageSelector(
+const { currentPage, maxPage, Control } = usePageSelector(
     employees.length, // longueur totale
     10, // lignes par page
     1, // page initiale
 );
 
-controle.next(); // page suivante
-controle.prev(); // page précédente
-controle.set(3); // aller à la page 3
+Control.next(); // page suivante
+Control.prev(); // page précédente
+Control.set(3); // aller à la page 3
 ```
 
 **Retourne :**
 
-| Propriété       | Type                     | Description                |
-| --------------- | ------------------------ | -------------------------- |
-| `currentPage`   | `number`                 | Page actuelle              |
-| `maxPage`       | `number`                 | Nombre total de pages      |
-| `controle.next` | `() => void`             | Aller à la page suivante   |
-| `controle.prev` | `() => void`             | Aller à la page précédente |
-| `controle.set`  | `(page: number) => void` | Aller à une page précise   |
+| Propriété      | Type                     | Description                |
+| -------------- | ------------------------ | -------------------------- |
+| `currentPage`  | `number`                 | Page actuelle              |
+| `maxPage`      | `number`                 | Nombre total de pages      |
+| `Control.next` | `() => void`             | Aller à la page suivante   |
+| `Control.prev` | `() => void`             | Aller à la page précédente |
+| `Control.set`  | `(page: number) => void` | Aller à une page précise   |
 
 ---
 
@@ -380,4 +400,4 @@ Chaque composant accepte une prop `className` qui est utilisée comme **préfixe
 </table>
 ```
 
-Les styles par défaut sont importés automatiquement via les fichiers CSS internes (`data-table.css`, `data-row.css`, `row-label.css`, `page-controleur.css`). Vous pouvez les surcharger avec vos propres règles CSS.
+Les styles par défaut sont importés automatiquement via les fichiers CSS internes (`data-table.css`, `data-row.css`, `row-label.css`, `page-controller.css`). Vous pouvez les surcharger avec vos propres règles CSS.
