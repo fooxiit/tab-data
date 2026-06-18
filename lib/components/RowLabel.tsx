@@ -2,8 +2,6 @@ import useTabDataContext from '../hook/useTabDataContext';
 import type { RowModelType } from '../type/type';
 import FilterSelector from './FilterSelector';
 import '../style/row-label.css';
-import sortIconActive from '../assets/sort_active.svg';
-import sortIconUnactive from '../assets/sort_unactive.svg';
 
 interface RowLabelProps<D> {
     rowModel: RowModelType<D>;
@@ -11,7 +9,7 @@ interface RowLabelProps<D> {
 }
 //Rend la ligne d'en-têtes `<thead>` avec les libellés
 export default function RowLabel<D>({ rowModel, className }: RowLabelProps<D>) {
-    const { filterBy, sortBy, filterOptions, id, filter, sortByValue } = useTabDataContext();
+    const { filterBy, sortBy, filterOptions, id, filter } = useTabDataContext();
     return (
         <tr className={className ? `${className}__label` : 'data-table__label'}>
             {rowModel.columns.map((column, index) => (
@@ -20,14 +18,14 @@ export default function RowLabel<D>({ rowModel, className }: RowLabelProps<D>) {
                         <span>{column.label} </span>
                         <div className={className ? `${className}__label__cell-icons` : 'data-table__label__cell-icons'}>
                             {rowModel.sort && (
-                                <i
+                                <div
                                     onClick={() => {
                                         sortBy(column.dataKey as string);
                                     }}
                                     className={className ? `${className}__label__sort-icon` : 'btn data-table__label__sort-icon'}
                                 >
-                                    {sortByValue?.key === column.dataKey ? <img src={sortIconActive} alt="Sorted" /> : <img src={sortIconUnactive} alt="Sort" />}
-                                </i>
+                                    <SortIcon dataKey={column.dataKey} />
+                                </div>
                             )}
                             {filterOptions && (
                                 <FilterSelector
@@ -40,5 +38,35 @@ export default function RowLabel<D>({ rowModel, className }: RowLabelProps<D>) {
                 </th>
             ))}
         </tr>
+    );
+}
+type SortByIcon<D> = {
+    dataKey: keyof D;
+};
+function SortIcon<D>({ dataKey }: SortByIcon<D>) {
+    const { sortByValue } = useTabDataContext();
+    if (sortByValue?.key === dataKey) {
+        switch (sortByValue.direction) {
+            case 'asc':
+                return (
+                    <div className="sort-icon__warper sort-icon__warper--asc">
+                        <i className="sort-icon--asc"></i>
+                    </div>
+                );
+            case 'desc':
+                return (
+                    <div className="sort-icon__warper sort-icon__warper--desc">
+                        <i className="sort-icon--desc"></i>
+                    </div>
+                );
+
+            default:
+                sortByValue.direction satisfies never;
+        }
+    }
+    return (
+        <div className="sort-icon__warper sort-icon__warper--none">
+            <i className="sort-icon--none"></i>
+        </div>
     );
 }
