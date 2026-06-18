@@ -7,7 +7,7 @@ import libCss from 'vite-plugin-libcss';
 
 // https://vite.dev/config/
 export default defineConfig({
-    plugins: [react(), dts({ tsconfigPath: './tsconfig.lib.json' }), libCss()],
+    plugins: [react(), dts({ tsconfigPath: './tsconfig.lib.json', exclude: ['./lib/test'] }), libCss()],
     test: {
         environment: 'jsdom',
         globals: true,
