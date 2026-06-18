@@ -1,20 +1,27 @@
-.data-table__page-controleur__cell {
+.data-table__page-controller__cell {
     text-align: end;
     height: 35px;
 }
 
-.data-table__page-controleur__button {
+.data-table__page-controller__cell {
     height: 100%;
     background: white;
     border: #f3f3f3 solid 0.5pt;
     cursor: pointer;
 }
 
-.data-table__page-controleur td {
+.data-table__page-controller__button {
+    height: 100%;
+    background: white;
+    border: #f3f3f3 solid 0.5pt;
+    cursor: pointer;
+}
+
+.data-table__page-controller__cell td {
     border: none !important;
 }
 
-.data-table__page-controleur__page-info {
+.data-table__page-controller__page-info {
     background: #548fc3;
     width: fit-content;
     height: 100%;
@@ -23,7 +30,7 @@
     align-items: center;
 }
 
-.data-table__page-controleur__content {
+.data-table__page-controller__content {
     display: flex;
     align-items: center;
     justify-content: end;

@@ -19,35 +19,35 @@ describe('test usePageSelector hook', () => {
     test('should set page to specific page', () => {
         const { result } = renderHook(() => usePageSelector(100, 10, 0));
         act(() => {
-            result.current.controle.set(5);
+            result.current.Control.set(5);
         });
         expect(result.current.currentPage).toBe(5);
     });
     test('should go to next page', () => {
         const { result } = renderHook(() => usePageSelector(100, 10, 0));
         act(() => {
-            result.current.controle.next();
+            result.current.Control.next();
         });
         expect(result.current.currentPage).toBe(1);
     });
     test('should go to previous page', () => {
         const { result } = renderHook(() => usePageSelector(100, 10, 2));
         act(() => {
-            result.current.controle.prev();
+            result.current.Control.prev();
         });
         expect(result.current.currentPage).toBe(1);
     });
     test('should not go to next page if current page is last page', () => {
         const { result } = renderHook(() => usePageSelector(100, 10, 9));
         act(() => {
-            result.current.controle.next();
+            result.current.Control.next();
         });
         expect(result.current.currentPage).toBe(9);
     });
     test('should not go to previous page if current page is first page', () => {
         const { result } = renderHook(() => usePageSelector(100, 10, 0));
         act(() => {
-            result.current.controle.prev();
+            result.current.Control.prev();
         });
         expect(result.current.currentPage).toBe(0);
     });

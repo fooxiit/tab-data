@@ -13,7 +13,7 @@ function usePageSelector(dataLength: number, maxRow?: number, InitialPage?: numb
         if (page < 0 || page >= maxPage) return;
         setPage(page);
     }
-    return { currentPage: page, maxPage, controle: { next, prev, set } };
+    return { currentPage: page, maxPage, Control: { next, prev, set } };
 }
 
 export default usePageSelector;

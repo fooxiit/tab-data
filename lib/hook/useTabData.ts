@@ -2,17 +2,17 @@ import { useMemo } from 'react';
 import compareString from '../function/compareString';
 import type { SortBy } from './useSelectSort';
 
-export type PageControle = {
+export type PageControl = {
     currentPage: number;
     maxPage: number;
-    controle: {
+    Control: {
         next: () => void;
         prev: () => void;
         set: (page: number) => void;
     };
 } | null;
 
-interface arguments<D extends Record<string, string>> {
+interface props<D extends Record<string, string>> {
     datas: D[];
     isSort?: boolean;
     isFilter?: boolean;
@@ -22,10 +22,10 @@ interface arguments<D extends Record<string, string>> {
     page?: number;
 }
 //Hook principal qui applique le filtrage, le tri et la pagination sur un tableau de données.
-function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter, maxRow, filter = new Map(), sortByValue, page }: arguments<D>) {
+function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter, maxRow, filter = new Map(), sortByValue, page }: props<D>) {
     if (maxRow && maxRow < 1) throw new Error('maxRow must be greater than 0');
 
-    const filtredDatas = useMemo(() => {
+    const filteredDatas = useMemo(() => {
         if (filter.size === 0 || !isFilter) return datas;
         return datas.filter((data) => {
             let isValid = true;
@@ -43,9 +43,9 @@ function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter,
             if (sortBy.direction === 'asc') return [...datas].sort((a, b) => compareString('US', a[sortBy.key as string], b[sortBy.key as string]));
             return [...datas].sort((a, b) => compareString('US', b[sortBy.key as string], a[sortBy.key as string]));
         };
-        if (!sortByValue || !isSort) return filtredDatas;
-        return sortDataBy(sortByValue, filtredDatas);
-    }, [filtredDatas, sortByValue, isSort]);
+        if (!sortByValue || !isSort) return filteredDatas;
+        return sortDataBy(sortByValue, filteredDatas);
+    }, [filteredDatas, sortByValue, isSort]);
 
     const limitedDatas = useMemo(() => {
         if (!maxRow || page === undefined) return sortDatas;
@@ -55,7 +55,7 @@ function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter,
     }, [sortDatas, page, maxRow]);
 
     return {
-        filtedDatas: limitedDatas,
+        filteredDatas: limitedDatas,
     };
 }
 

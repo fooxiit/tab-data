@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import useExpend from '../hook/useExpend';
 import useSearch from '../hook/useSearch';
 import checkIcon from '../assets/check_small.svg';
-import fillterIcon from '../assets/filter_list.svg';
+import filterIcon from '../assets/filter_list.svg';
 
 interface FilterSelectorProps {
     option?: [unknown, boolean][];
@@ -12,7 +12,7 @@ interface FilterSelectorProps {
 //Menu déroulant de filtrage avec barre de recherche interne.
 export default function FilterSelector({ option, onFilterSelect, className }: FilterSelectorProps) {
     const filterFuction = useCallback((item: [unknown, boolean], searchValue: string) => (item[0] as string).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()), []);
-    const [filterIsOpen, controleFilter] = useExpend(false);
+    const [filterIsOpen, ControlFilter] = useExpend(false);
     const { searchResult, searchValue, onSearchChange } = useSearch(option ? option : [], filterFuction);
     function handleSelect(e: React.MouseEvent<HTMLDivElement>) {
         e.stopPropagation();
@@ -20,9 +20,9 @@ export default function FilterSelector({ option, onFilterSelect, className }: Fi
     }
     if (option)
         return (
-            <div className={className ? `${className}__label__filter` : 'data-table__label__filter'} onClick={() => controleFilter.toggle()}>
+            <div className={className ? `${className}__label__filter` : 'data-table__label__filter'} onClick={() => ControlFilter.toggle()}>
                 <i className={className ? `${className}__label__filter__icon` : 'data-table__label__filter__icon btn'}>
-                    <img src={fillterIcon} alt="Filter" />
+                    <img src={filterIcon} alt="Filter" />
                 </i>
                 {filterIsOpen && (
                     <div className={className ? `${className}__label__filter__dropdown` : 'data-table__label__filter__dropdown'} onClick={(e) => e.stopPropagation()}>

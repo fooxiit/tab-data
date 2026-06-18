@@ -3,12 +3,12 @@ import TabData from '../lib/components/TabData';
 
 function createData(number: number) {
     const city = ['Los Angeles', 'New York', 'Houston', 'Miami', 'Chicago', 'Seattle', 'Denver', 'San Francisco', 'New York'];
-    const departement = ['Engineering', 'Marketing', 'Sales', 'HR', 'Finance', 'Operations', 'IT', 'Legal', 'Marketing'];
+    const department = ['Engineering', 'Marketing', 'Sales', 'HR', 'Finance', 'Operations', 'IT', 'Legal', 'Marketing'];
     const role = ['Software Engineer', 'Marketing Manager', 'Sales Associate', 'HR Specialist', 'Financial Analyst', 'Operations Manager', 'IT Specialist', 'Legal Assistant', 'Marketing Coordinator'];
     const zipCode = ['12345', '67890', '54321', '09876', '11223', '33445', '55667', '99887', '11223'];
     const street = ['123 Main St', '456 Oak Ave', '789 Pine Rd', '321 Elm St', '555 Maple Dr', '666 Oak St', '777 Pine St', '888 Cedar Ln', '999 Oak St'];
     const state = ['California', 'New York', 'Texas', 'Florida', 'Illinois', 'Washington', 'Colorado', 'California', 'New York'];
-    const satus = ['active', 'inactive'];
+    const status = ['active', 'inactive'];
     const firstName = ['John ', 'Jane', 'Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank', 'Grace'];
     const lastName = ['Doe', 'Smith', 'Johnson', 'Brown', 'Davis', 'Wilson', 'Taylor', 'Moore', 'Lee'];
     const datas = [];
@@ -21,10 +21,10 @@ function createData(number: number) {
             firstName: firstNameRandom,
             lastName: lastNameRandom,
             email: `${firstNameRandom.toLowerCase()}.${lastNameRandom.toLowerCase()}@example.com`,
-            satus: satus[Math.floor(Math.random() * satus.length)],
-            departement: departement[Math.floor(Math.random() * departement.length)],
+            status: status[Math.floor(Math.random() * status.length)],
+            department: department[Math.floor(Math.random() * department.length)],
             role: role[Math.floor(Math.random() * role.length)],
-            contry: 'USA',
+            country: 'USA',
             zipCode: zipCode[Math.floor(Math.random() * zipCode.length)],
             state: state[Math.floor(Math.random() * state.length)],
             street: street[Math.floor(Math.random() * street.length)],
@@ -50,13 +50,13 @@ function App() {
                     columns: [
                         { dataKey: 'firstName', label: 'FirstName' },
                         { dataKey: 'lastName', label: 'LastName' },
-                        { dataKey: 'departement', label: 'Departement' },
+                        { dataKey: 'department', label: 'Department' },
                         { dataKey: 'role', label: 'Role' },
-                        { dataKey: 'contry', label: 'Country' },
+                        { dataKey: 'country', label: 'Country' },
                         { dataKey: 'state', label: 'State' },
                         { dataKey: 'city', label: 'City' },
                         { dataKey: 'street', label: 'Street' },
-                        { dataKey: 'satus', label: 'Status' },
+                        { dataKey: 'status', label: 'Status' },
                     ],
                     sort: true,
                     filter: true,

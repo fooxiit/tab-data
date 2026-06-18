@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-//xtrait les valeurs uniques de chaque colonne pour alimenter les menus de filtres.
+//extrait les valeurs uniques de chaque colonne pour alimenter les menus de filtres.
 function useExtractFilterOption<D extends Record<string, string>>(datas: D[], isFilter: boolean | undefined) {
     const filterOptions = useMemo(() => {
         if (!isFilter) return null;
