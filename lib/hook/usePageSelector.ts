@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 
 //Gère la pagination
 function usePageSelector<D extends Record<string, string>>(data: D[], maxRow?: number, InitialPage?: number) {
-    const [page, setPage] = useState(InitialPage || 0);
+    const [page, setPage] = useState(data.length > 0 ? InitialPage || 0 : 0);
     const maxPage = useMemo(() => Math.ceil(data.length / (maxRow || data.length)), [data.length, maxRow]);
     const limitedData = useMemo(() => {
         if (!maxRow || page === undefined) return data;
