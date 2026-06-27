@@ -29,8 +29,8 @@ export default function TabData<D extends Record<string, string>>({ datas, id, m
     const { filter, filterBy } = useFilter<D>();
     const { sortBy, sortByValue } = useSelectSort<D>();
     const { searchResult, onSearchChange, searchValue } = useSearch(datas, searchFunction);
-    const { currentPage, maxPage, Control } = usePageSelector(datas.length, maxRow);
-    const { filteredDatas } = useTabData({ filter, datas: searchResult, isSort: rowModel.sort, isFilter: rowModel.filter, maxRow, sortByValue, page: currentPage });
+    const { filteredDatas } = useTabData({ filter, datas: searchResult, isSort: rowModel.sort, isFilter: rowModel.filter, maxRow, sortByValue });
+    const { currentPage, maxPage, Control, limitedData } = usePageSelector(filteredDatas, maxRow);
     const filterOptions = useExtractFilterOption(datas, rowModel.filter);
     return (
         <TabDataContext.Provider
@@ -57,7 +57,7 @@ export default function TabData<D extends Record<string, string>>({ datas, id, m
                         <RowLabel rowModel={rowModel} className={className} />
                     </thead>
                     <tbody className={className ? `${className}__tbody` : 'data-table__tbody'}>
-                        {filteredDatas.map((data) => (
+                        {limitedData.map((data) => (
                             <DataRow key={`${id}-row-${data[rowModel.idKey]}`} id={data[rowModel.idKey]} rowModel={{ ...rowModel, tabId: id }} className={className} data={data} />
                         ))}
                     </tbody>

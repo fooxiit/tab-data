@@ -19,10 +19,9 @@ interface props<D extends Record<string, string>> {
     maxRow?: number;
     filter?: Map<keyof D, Set<unknown>>;
     sortByValue?: SortBy<D> | null;
-    page?: number;
 }
 //Hook principal qui applique le filtrage, le tri et la pagination sur un tableau de données.
-function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter, maxRow, filter = new Map(), sortByValue, page }: props<D>) {
+function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter, maxRow, filter = new Map(), sortByValue }: props<D>) {
     if (maxRow && maxRow < 1) throw new Error('maxRow must be greater than 0');
 
     const filteredDatas = useMemo(() => {
@@ -47,15 +46,8 @@ function useTabData<D extends Record<string, string>>({ datas, isSort, isFilter,
         return sortDataBy(sortByValue, filteredDatas);
     }, [filteredDatas, sortByValue, isSort]);
 
-    const limitedDatas = useMemo(() => {
-        if (!maxRow || page === undefined) return sortDatas;
-        const start = page * maxRow;
-        const end = start + maxRow;
-        return sortDatas.slice(start, end);
-    }, [sortDatas, page, maxRow]);
-
     return {
-        filteredDatas: limitedDatas,
+        filteredDatas: sortDatas,
     };
 }
 

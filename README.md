@@ -215,7 +215,6 @@ const { filtedDatas } = useTabData({
 | `maxRow`      | `number`                     | Lignes max par page         |
 | `filter`      | `Map<keyof D, Set<unknown>>` | Filtres actifs              |
 | `sortByValue` | `SortBy<D> \| null`          | Colonne et direction de tri |
-| `page`        | `number`                     | Page courante               |
 
 **Retourne :** `{ filtedDatas: D[] }`
 
