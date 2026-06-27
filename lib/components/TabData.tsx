@@ -32,6 +32,7 @@ export default function TabData<D extends Record<string, string>>({ datas, id, m
     const { filteredDatas } = useTabData({ filter, datas: searchResult, isSort: rowModel.sort, isFilter: rowModel.filter, maxRow, sortByValue });
     const { currentPage, maxPage, Control, limitedData } = usePageSelector(filteredDatas, maxRow);
     const filterOptions = useExtractFilterOption(datas, rowModel.filter);
+    console.log(currentPage);
     return (
         <TabDataContext.Provider
             value={{

@@ -43,7 +43,7 @@ function App() {
     return (
         <>
             <TabData
-                datas={MOCKED_DATA}
+                datas={[]}
                 id="rh-data-tab"
                 maxRow={15}
                 rowModel={{
